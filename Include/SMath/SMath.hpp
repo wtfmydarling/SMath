@@ -14,11 +14,12 @@ namespace smath {
     // @brief The value of Pi as a single-precision float.
     constexpr float Pi = 3.141592653f;
 
+    inline float Sqrt(float _Value) noexcept;
+
     // @brief Converts degrees to radians.
     // @param _Degrees Angle in degrees.
     // @return Corresponding angle in radians.
     inline constexpr float ToRadians(float _Degrees) noexcept;
-
     
     // @brief Converts radians to degrees.
     // @param _Radians Angle in radians.

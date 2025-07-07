@@ -4,6 +4,10 @@
 
 namespace smath {
 
+    inline float Sqrt(float _Value) noexcept {
+        return std::sqrtf(_Value);
+    }
+
     inline constexpr float ToRadians(float _Degrees) noexcept {
         return _Degrees * (Pi / 180.0f);
     }
@@ -86,17 +90,17 @@ namespace smath {
     }
 
     inline float Distance(const Vector2& _A, const Vector2& _B) noexcept {
-        return std::sqrt((_B.x - _A.x) * (_B.x - _A.x) + (_B.y - _A.y) * (_B.y - _A.y));
+        return Sqrt((_B.x - _A.x) * (_B.x - _A.x) + (_B.y - _A.y) * (_B.y - _A.y));
     }
 
     inline float Distance(const Vector3& _A, const Vector3& _B) noexcept {
-        return std::sqrt((_B.x - _A.x) * (_B.x - _A.x) + (_B.y - _A.y) * (_B.y - _A.y) +
-                         (_B.z - _A.z) * (_B.z - _A.z));
+        return Sqrt((_B.x - _A.x) * (_B.x - _A.x) + (_B.y - _A.y) * (_B.y - _A.y) +
+                    (_B.z - _A.z) * (_B.z - _A.z));
     }
 
     inline float Distance(const Vector4& _A, const Vector4& _B) noexcept {
-        return std::sqrt((_B.x - _A.x) * (_B.x - _A.x) + (_B.y - _A.y) * (_B.y - _A.y) +
-                         (_B.z - _A.z) * (_B.z - _A.z) + (_B.w - _A.w) * (_B.w - _A.w));
+        return Sqrt((_B.x - _A.x) * (_B.x - _A.x) + (_B.y - _A.y) * (_B.y - _A.y) +
+                    (_B.z - _A.z) * (_B.z - _A.z) + (_B.w - _A.w) * (_B.w - _A.w));
     }
 
     inline constexpr float DotProduct(const Vector2& _A, const Vector2& _B) noexcept {
@@ -116,15 +120,15 @@ namespace smath {
     }
 
     inline float Length(const Vector2& _Vec) noexcept {
-        return std::sqrt(_Vec.x * _Vec.x + _Vec.y * _Vec.y);
+        return Sqrt(_Vec.x * _Vec.x + _Vec.y * _Vec.y);
     }
 
     inline float Length(const Vector3& _Vec) noexcept {
-        return std::sqrt(_Vec.x * _Vec.x + _Vec.y * _Vec.y + _Vec.z * _Vec.z);
+        return Sqrt(_Vec.x * _Vec.x + _Vec.y * _Vec.y + _Vec.z * _Vec.z);
     }
 
     inline float Length(const Vector4& _Vec) noexcept {
-        return std::sqrt(_Vec.x * _Vec.x + _Vec.y * _Vec.y + _Vec.z * _Vec.z + _Vec.w * _Vec.w);
+        return Sqrt(_Vec.x * _Vec.x + _Vec.y * _Vec.y + _Vec.z * _Vec.z + _Vec.w * _Vec.w);
     }
 
     inline Vector2 Normalize(const Vector2& _Vec) {
@@ -161,22 +165,22 @@ namespace smath {
     //}
 
     inline float GetVectorYaw(const Vector3& _Vec) {
-        return std::atan2(Normalize(_Vec).x, Normalize(_Vec).z);
+        return ATan2(Normalize(_Vec).x, Normalize(_Vec).z);
     }
 
     inline float GetVectorPitch(const Vector3& _Vec) {
-        return std::asin(Normalize(_Vec).y);
+        return ASin(Normalize(_Vec).y);
     }
 
     inline constexpr Vector3 GetVectorFromYawPitch(float _Yaw, float _Pitch) noexcept {
-        return Vector3(std::sin(_Yaw) * std::cos(_Pitch), std::sin(_Pitch),
-                       std::cos(_Yaw) * std::cos(_Pitch));
+        return Vector3(Sin(_Yaw) * Cos(_Pitch), Sin(_Pitch),
+                       Cos(_Yaw) * Cos(_Pitch));
     }
 
     inline Vector3 RotateAroundAxis(const Vector3& _Vec, const Vector3& _Axis, float _Angle) {
         Vector3 Axis = Normalize(_Axis);
-        float CosAngle = std::cos(_Angle);
-        float SinAngle = std::sin(_Angle);
+        float CosAngle = Cos(_Angle);
+        float SinAngle = Sin(_Angle);
 
         return _Vec * CosAngle + CrossProduct(Axis, _Vec) * SinAngle +
                Axis * DotProduct(Axis, _Vec) * (1.0f - CosAngle);
@@ -187,7 +191,7 @@ namespace smath {
     }
 
     inline float Norm(const Quaternion& _Quat) noexcept {
-        return std::sqrt(SqrNorm(_Quat));
+        return Sqrt(SqrNorm(_Quat));
     }
 
     inline Quaternion Normalize(const Quaternion& _Quat) {
