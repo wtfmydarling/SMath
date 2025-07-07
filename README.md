@@ -25,6 +25,8 @@ This allows replacing the backend implementation globally if a different or fast
 
 The library is written for personal use in a 3D model viewer, but may be useful in other projects as well.
 
+Types are plain structs; all operations live in free functions.
+
 ## Installation 
 
 No build step is required. Just add the `Include/` directory to your compiler's include path and include the main header in your source file:
@@ -47,6 +49,7 @@ int main() {
     auto normalized = smath::Normalize(sum);
 }
 ```
+Short aliases (`Vec2`, `Vec3`, `Mat4`, etc.) are provided as alternatives to full type names.
 
 ## Requirements
 
