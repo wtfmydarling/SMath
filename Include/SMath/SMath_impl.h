@@ -33,11 +33,11 @@ namespace smath {
     }
 
     inline float Tan(float _Angle) noexcept {
-        return std::tan(_Angle);
+        return std::tanf(_Angle);
     }
 
     inline float TanDegrees(float _Angle) noexcept {
-        return std::tan(ToRadians(_Angle));
+        return std::tanf(ToRadians(_Angle));
     }
 
     inline float ASin(float _Value) noexcept {
@@ -178,9 +178,9 @@ namespace smath {
     }
 
     inline Vector3 RotateAroundAxis(const Vector3& _Vec, const Vector3& _Axis, float _Angle) {
-        Vector3 Axis = Normalize(_Axis);
-        float CosAngle = Cos(_Angle);
-        float SinAngle = Sin(_Angle);
+        Vector3 Axis    = Normalize(_Axis);
+        float CosAngle  = Cos(_Angle);
+        float SinAngle  = Sin(_Angle);
 
         return _Vec * CosAngle + CrossProduct(Axis, _Vec) * SinAngle +
                Axis * DotProduct(Axis, _Vec) * (1.0f - CosAngle);
@@ -204,6 +204,20 @@ namespace smath {
 
     inline Quaternion Inverse(const Quaternion& _Quat) {
         return Conjugate(_Quat) / SqrNorm(_Quat);
+    }
+
+    Quaternion ToQuaternion(const Rotator& _Rot) noexcept {
+        float CosRoll   = Cos(_Rot.Roll * 0.5);
+        float SinRoll   = Sin(_Rot.Roll * 0.5);
+        float CosPitch  = Cos(_Rot.Pitch * 0.5);
+        float SinPitch  = Sin(_Rot.Pitch * 0.5);
+        float CosYaw    = Cos(_Rot.Yaw * 0.5);
+        float SinYaw    = Sin(_Rot.Yaw * 0.5);
+
+        return Quaternion(CosRoll * CosPitch * CosYaw + SinRoll * SinPitch * SinYaw, 
+                          SinRoll * CosPitch * CosYaw - CosRoll * SinPitch * SinYaw,
+                          CosRoll * SinPitch * CosYaw + SinRoll * CosPitch * SinYaw,
+                          CosRoll * CosPitch * SinYaw - SinRoll * SinPitch * CosYaw);
     }
 
 } // namespace smath

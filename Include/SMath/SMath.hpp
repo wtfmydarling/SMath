@@ -6,7 +6,9 @@
 #include "Types/Vector2.hpp"
 #include "Types/Vector3.hpp"
 #include "Types/Vector4.hpp"
+#include "Types/Rotator.hpp"
 #include "Types/Matrix4x4.hpp"
+#include "Types/Matrix3x3.hpp"
 #include "Types/Quaternion.hpp"
 
 
@@ -14,6 +16,11 @@ namespace smath {
     // @brief The value of Pi as a single-precision float.
     constexpr float Pi = 3.141592653f;
 
+    // @brief Computes the Square root of an value.
+    // @param _Value number in [0, +inf).
+    // @return Square root of the value.
+    // @note Wrapper around Sqrt function
+    //       Uses std::sqrt by default. The implementation can be replaced if needed.
     inline float Sqrt(float _Value) noexcept;
 
     // @brief Converts degrees to radians.
@@ -271,8 +278,11 @@ namespace smath {
     // @return Inverse quaternion.
     inline Quaternion Inverse(const Quaternion& _Quat);
 
+    // @brief Converts rotator to quaternion.
+    // @param _Rot Input rotator.
+    // @return rotation quaternion.
+    inline Quaternion ToQuaternion(const Rotator& _Rot) noexcept;
 
-
-    } // namespace Math
+} // namespace Math
 
 #include "SMath_impl.h"

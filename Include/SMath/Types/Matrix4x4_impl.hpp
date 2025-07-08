@@ -4,10 +4,12 @@
 
 namespace smath {
     inline constexpr Matrix4x4::Matrix4x4(float _Scalar) noexcept 
-        : Data({_Scalar, 0, 0, 0, 0, _Scalar, 0, 0, 0, 0, _Scalar, 0, 0, 0, 0, _Scalar}) {}
+        : Data({_Scalar, 0, 0, 0, 0, _Scalar, 0, 0, 0, 0, _Scalar, 0, 0, 0, 0, _Scalar}) {
+    }
 
     inline constexpr Matrix4x4::Matrix4x4(const std::array<std::array<float, 4>, 4>& _Data) noexcept
-        : Data(_Data) {}
+        : Data(_Data) {
+    }
 
     inline constexpr Matrix4x4::Matrix4x4(const Matrix4x4& _Other) noexcept 
         : Data(_Other.Data) {
@@ -15,8 +17,8 @@ namespace smath {
 
     inline constexpr Matrix4x4 Matrix4x4::operator+(const Matrix4x4& _Other) const noexcept {
         Matrix4x4 Result;
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
                 Result.Data[i][j] = Data[i][j] + _Other.Data[i][j];
             }
         }
@@ -26,8 +28,8 @@ namespace smath {
 
     inline constexpr Matrix4x4 Matrix4x4::operator-(const Matrix4x4& _Other) const noexcept {
         Matrix4x4 Result;
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
                 Result.Data[i][j] = Data[i][j] - _Other.Data[i][j];
             }
         }
@@ -37,9 +39,9 @@ namespace smath {
 
     inline constexpr Matrix4x4 Matrix4x4::operator*(const Matrix4x4& _Other) const noexcept {
         Matrix4x4 Result(0.0f);
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
-                for (size_t k = 0; k < 4; ++k) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
+                for (size_t k = 0; k < 4; k++) {
                     Result.Data[i][j] += Data[i][k] * _Other.Data[k][j];
                 }
             }
@@ -50,8 +52,8 @@ namespace smath {
 
     inline constexpr Matrix4x4 Matrix4x4::operator*(float _Scalar) const noexcept {
         Matrix4x4 Result;
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
                 Result.Data[i][j] = Data[i][j] * _Scalar;
             }
         }
@@ -65,8 +67,8 @@ namespace smath {
         }
 
         Matrix4x4 Result;
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
                 Result.Data[i][j] = Data[i][j] / _Scalar;
             }
         }
@@ -75,8 +77,8 @@ namespace smath {
     }
 
     inline constexpr Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& _Other) noexcept {
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
                 Data[i][j] += _Other.Data[i][j];
             }
         }
@@ -84,8 +86,8 @@ namespace smath {
     }
 
     inline constexpr Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& _Other) noexcept {
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
                 Data[i][j] -= _Other.Data[i][j];
             }
         }
@@ -95,9 +97,9 @@ namespace smath {
 
     inline constexpr Matrix4x4& Matrix4x4::operator*=(const Matrix4x4& _Other) noexcept {
         Matrix4x4 Result(0.0f);
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
-                for (size_t k = 0; k < 4; ++k) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
+                for (size_t k = 0; k < 4; k++) {
                     Result.Data[i][j] += Data[i][k] * _Other.Data[k][j];
                 }
             }
@@ -108,8 +110,8 @@ namespace smath {
     }
 
     inline constexpr Matrix4x4& Matrix4x4::operator*=(float _Scalar) noexcept {
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
                 Data[i][j] *= _Scalar;
             }
         }
@@ -122,8 +124,8 @@ namespace smath {
             throw std::runtime_error("Division by zero in Matrix4x4 operator/=");
         }
 
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
                 Data[i][j] /= _Scalar;
             }
         }
@@ -132,8 +134,8 @@ namespace smath {
     }
 
     inline constexpr bool Matrix4x4::operator==(const Matrix4x4& _Other) const noexcept {
-        for (size_t i = 0; i < 4; ++i) {
-            for (size_t j = 0; j < 4; ++j) {
+        for (size_t i = 0; i < 4; i++) {
+            for (size_t j = 0; j < 4; j++) {
                 if (Data[i][j] != _Other.Data[i][j]) {
                     return false;
                 }
